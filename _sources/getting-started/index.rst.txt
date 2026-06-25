@@ -1,0 +1,22 @@
+Getting Started
+===============
+
+.. toctree::
+   :maxdepth: 1
+
+   installation
+
+Section Pro adds non-destructive section cuts, 2D technical drawings, and named view management to Blender. Once installed, everything is accessible from the **Section Pro** tab in the 3D Viewport sidebar (press :kbd:`N` to open the sidebar).
+
+Quick Overview
+--------------
+
+The typical workflow looks like this:
+
+1. **Create a section** – Press **+** in the *Sections* panel. Choose which objects the section should affect (its scope), set an alignment, and confirm. A flat plane object representing the cut appears in the scene.
+2. **Enable the section** – In the active view, toggle the section on. The cut is applied to the scoped objects.
+3. **Create a drawing** – Press **+** in the *Drawings* panel while a section is active. Configure projection and hidden edge options, then confirm. A mesh object containing the 2D line drawing is created.
+4. **Export the drawing** – From the drawing's *Export* panel, save the drawing as DXF, SVG, or JSON.
+5. **Use views** – Create additional views to store different cut states, then switch between them.
+
+For a deeper understanding of how each piece works, see the :doc:`/concepts/index` section.

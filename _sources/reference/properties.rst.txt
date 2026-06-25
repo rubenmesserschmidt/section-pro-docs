@@ -1,0 +1,350 @@
+Properties
+==========
+
+Section Pro attaches custom property groups to Blender's built-in data types. All are accessible from Python via the ``section_pro`` attribute on the corresponding data-block.
+
+
+Scene Properties — ``bpy.types.Scene.section_pro``
+---------------------------------------------------
+
+Stored on every Blender scene as ``scene.section_pro``.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``sections``
+     - Collection
+     - List of :ref:`SectionItem <prop-section-item>` entries (one per section).
+   * - ``drawings``
+     - Collection
+     - List of :ref:`DrawingItem <prop-drawing-item>` entries (one per drawing).
+   * - ``views``
+     - Collection
+     - List of :ref:`View <prop-view>` entries.
+   * - ``active_section_index``
+     - Int
+     - Index of the currently active section in the list.
+   * - ``active_drawing_index``
+     - Int
+     - Index of the currently active drawing in the list.
+   * - ``active_view_index``
+     - Int
+     - Index of the currently active view. Changing this index triggers view restoration (if enabled in preferences).
+
+
+.. _prop-section-item:
+
+SectionItem
+~~~~~~~~~~~
+
+A lightweight reference that links a list entry to its section object.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``section_obj``
+     - Object pointer
+     - The Blender object acting as the section plane.
+
+
+.. _prop-drawing-item:
+
+DrawingItem
+~~~~~~~~~~~
+
+A lightweight reference that links a list entry to its drawing object.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``drawing_obj``
+     - Object pointer
+     - The Blender object containing the drawing mesh.
+
+
+.. _prop-view:
+
+View
+~~~~
+
+Stored in ``scene.section_pro.views``.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``section_method``
+     - Enum
+     - Section rendering method for this view: ``BOOLEAN`` or ``SHADER``.
+   * - ``section_states``
+     - Collection
+     - Per-section enabled/hidden state. See :ref:`ViewSectionState <prop-view-section-state>`.
+   * - ``drawing_states``
+     - Collection
+     - Per-drawing show state. See :ref:`ViewDrawingState <prop-view-drawing-state>`.
+   * - ``save_viewport_orientation``
+     - Boolean
+     - Whether the viewport camera orientation is saved/restored for this view.
+   * - ``save_viewport_shading``
+     - Boolean
+     - Whether the viewport shading mode is saved/restored for this view.
+   * - ``save_viewport_projection``
+     - Boolean
+     - Whether the viewport projection type (orthographic/perspective) is saved/restored.
+   * - ``viewport_location``
+     - Vector (3)
+     - Saved viewport view location.
+   * - ``viewport_rotation_quaternion``
+     - Vector (4)
+     - Saved viewport view rotation as a quaternion.
+   * - ``viewport_distance``
+     - Float
+     - Saved viewport view distance / zoom level.
+   * - ``viewport_shading``
+     - String
+     - Saved viewport shading mode identifier.
+   * - ``viewport_projection``
+     - String
+     - Saved viewport projection mode identifier.
+
+
+.. _prop-view-section-state:
+
+ViewSectionState
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``section_obj``
+     - Object pointer
+     - The section object this state belongs to.
+   * - ``enabled``
+     - Boolean
+     - Whether the section is enabled in this view.
+   * - ``hidden``
+     - Boolean
+     - Whether the section object itself is hidden in the viewport.
+
+
+.. _prop-view-drawing-state:
+
+ViewDrawingState
+~~~~~~~~~~~~~~~~
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``drawing_obj``
+     - Object pointer
+     - The drawing object this state belongs to.
+   * - ``show``
+     - Boolean
+     - Whether the drawing is visible in this view.
+
+
+Object Properties — ``bpy.types.Object.section_pro``
+-----------------------------------------------------
+
+Stored on every Blender object as ``obj.section_pro``.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``uuid``
+     - String
+     - Unique identifier assigned by Section Pro. Used internally to track associations between objects.
+   * - ``role``
+     - Enum
+     - The object's role in the addon: ``NONE``, ``SECTION``, ``CUTTER``, ``TARGET``, or ``DRAWING``.
+   * - ``section``
+     - PropertyGroup
+     - Section plane settings. See :ref:`Section <prop-section>`. Only meaningful when ``role`` is ``SECTION``.
+   * - ``cutter``
+     - PropertyGroup
+     - Cutter settings. See :ref:`Cutter <prop-cutter>`. Only meaningful when ``role`` is ``CUTTER``.
+   * - ``drawing``
+     - PropertyGroup
+     - Drawing settings. See :ref:`Drawing <prop-drawing>`. Only meaningful when ``role`` is ``DRAWING``.
+   * - ``section_color``
+     - Color (RGB)
+     - The fill color applied to the section cut face (per object).
+   * - ``override_section_color``
+     - Boolean
+     - When enabled, this object's ``section_color`` takes priority over the collection's section color.
+   * - ``collection_section_color``
+     - Color (RGB)
+     - The section color inherited from the parent collection (read-only; set via the collection's ``section_pro.section_color``).
+   * - ``proxy``
+     - Object pointer
+     - Reference to this object's proxy mesh (for objects of unsupported types).
+   * - ``proxy_for``
+     - Object pointer
+     - If this object is a proxy, the source object it represents.
+
+
+.. _prop-section:
+
+Section
+~~~~~~~
+
+Accessible via ``obj.section_pro.section`` on section plane objects.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``scope``
+     - Enum
+     - Which objects are affected: ``OBJECTS``, ``COLLECTIONS``, or ``SCENE``.
+   * - ``collections``
+     - Collection
+     - List of collections in scope (only used when ``scope`` is ``COLLECTIONS``).
+   * - ``active_collection_index``
+     - Int
+     - Active index in the collections list.
+   * - ``cutter_obj``
+     - Object pointer
+     - The cutter object used by the Boolean method.
+   * - ``cutter_lazy_load``
+     - Boolean
+     - When ``True``, the cutter is not updated automatically on section transform changes. Use the :ref:`Update Cutter <op-update-cutter>` operator to apply changes manually.
+   * - ``show_plane``
+     - Boolean
+     - Whether the section plane gizmo overlay is visible in the viewport.
+   * - ``plane_color``
+     - Color (RGB)
+     - The color of the section plane gizmo overlay.
+
+
+.. _prop-cutter:
+
+Cutter
+~~~~~~
+
+Accessible via ``obj.section_pro.cutter`` on cutter objects.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``section_obj``
+     - Object pointer
+     - Back-reference to the section object that owns this cutter.
+
+
+.. _prop-drawing:
+
+Drawing
+~~~~~~~
+
+Accessible via ``obj.section_pro.drawing`` on drawing objects.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``src_section_obj``
+     - Object pointer
+     - The section object the drawing was generated from.
+   * - ``created_location``
+     - Vector (3)
+     - World location of the section object at the time of drawing creation.
+   * - ``created_rotation_euler``
+     - Vector (3)
+     - Rotation of the section object at the time of drawing creation.
+   * - ``create_at``
+     - Enum
+     - Placement mode used at creation: ``SECTION_ORIGIN``, ``WORLD_ORIGIN``, or ``CUSTOM``.
+   * - ``include_hidden_objs``
+     - Boolean
+     - Whether hidden objects were included.
+   * - ``create_projection``
+     - Boolean
+     - Whether projection edges were generated.
+   * - ``use_perspective``
+     - Boolean
+     - Whether perspective distortion was applied to projection edges.
+   * - ``perspective_distortion``
+     - Float
+     - Perspective distortion strength.
+   * - ``use_limit``
+     - Boolean
+     - Whether a projection limit distance was used.
+   * - ``limit_dist``
+     - Float
+     - Projection limit distance in scene units.
+   * - ``use_hed``
+     - Boolean
+     - Whether hidden edge detection was applied.
+   * - ``hed_max_iters``
+     - Int
+     - Maximum boundary-refinement iterations for HED.
+   * - ``hed_middle_segment_precision``
+     - Float
+     - Detection step size (metres) for mid-segment hidden checks.
+   * - ``hed_dissolve_angle``
+     - Float
+     - Angle threshold (radians) below which adjacent hidden segments are dissolved.
+   * - ``hed_merge_distance``
+     - Float
+     - Distance threshold (metres) for merging nearby hidden edge endpoints.
+   * - ``hed_sample_distance``
+     - Float
+     - Sampling distance (metres) along edges during hidden-edge detection.
+
+
+Collection Properties — ``bpy.types.Collection.section_pro``
+-------------------------------------------------------------
+
+Stored on every Blender collection as ``collection.section_pro``.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 35 15 50
+
+   * - Property
+     - Type
+     - Description
+   * - ``role``
+     - Enum
+     - Internal role of the collection: ``NONE``, ``INTERNAL``, ``SECTIONS``, ``CUTTERS``, ``PROXY``, ``DRAWINGS``, or ``TARGET``.
+   * - ``section_color``
+     - Color (RGB)
+     - Default section fill color applied to all objects in this collection. Changing this value propagates to all member objects that do not have ``override_section_color`` set.

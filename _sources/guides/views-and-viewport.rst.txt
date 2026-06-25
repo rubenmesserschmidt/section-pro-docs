@@ -1,0 +1,74 @@
+Views and the Viewport
+======================
+
+This guide explains how to create and use views to manage different section states and viewport configurations.
+
+
+Creating a View
+---------------
+
+Views are listed in the *Views* panel (visible once at least one section or drawing exists). Click **+** to open the creation dialog:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Setting
+     - Description
+   * - **Name**
+     - A descriptive name for the view (e.g. "Floor Plan", "Section A-A").
+   * - **Settings**
+     - Starting state for the new view.
+
+**Settings** options:
+
+- **Copy Active View** – The new view starts as an exact copy of the current active view’s section states, drawing states, and viewport settings. Convenient when you want a variation of an existing view.
+- **Blank View** – All sections are disabled and all drawings are hidden. Viewport settings are at their defaults.
+
+
+Switching Views
+---------------
+
+Click any view name in the *Views* list to switch to it. By default, switching a view:
+
+1. Enables / disables each section according to the stored state.
+2. Shows / hides each drawing according to the stored state.
+3. Restores the viewport orientation, projection, and shading (if any of those were saved for the view).
+
+You can change this behaviour in the addon preferences:
+
+- Disable **Restore View on Change** to stop the view from being restored automatically when switching views. Useful if you want to see a view's setup without loading it (especially for heavy boolean sections).
+- Enable **Auto Save Viewport on Change** to automatically snapshot the current viewport into the outgoing view before switching.
+
+
+Saving and Loading Viewport State
+---------------------------------
+
+To save the current 3D viewport into a view:
+
+1. Make the view active by clicking it in the list.
+2. In the *Viewport Settings* sub-panel, enable the checkboxes next to the states you want to save (**Orientation**, **Projection**, **Shading**).
+3. Click **Save Current**. You will be asked to confirm, as this overwrites any previously saved viewport data for this view.
+
+To restore the saved viewport without switching views:
+
+- Click **Load Saved** in the *Viewport Settings* sub-panel.
+
+
+Section Method per View
+-----------------------
+
+Each view has its own **Section Method** (found in the *Section Settings* sub-panel within the Views panel).
+See :doc:`/concepts/sections` for a detailed explanation of each method.
+
+Switching the method updates all enabled sections in the view immediately.
+
+
+Deleting a View
+---------------
+
+Select the view in the list and click **−** (Remove). You will be asked to confirm.
+
+.. warning::
+
+   You cannot delete the last remaining view while sections or drawings exist in the scene. Delete all sections and drawings first, or keep at least one view.

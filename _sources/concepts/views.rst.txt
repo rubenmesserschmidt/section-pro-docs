@@ -1,0 +1,58 @@
+Views
+=====
+
+A **view** is a named configuration that remembers which sections are enabled, which drawings are visible, and optionally a saved 3D viewport state. Views let you switch quickly between different cuts, presentation states, or levels of detail without manually toggling sections and drawings each time.
+
+Every Section Pro scene has at least one view. A default view is created automatically when you add your first section.
+
+
+What a View Stores
+------------------
+
+**Section states**
+    For each section in the scene, the view stores whether the section is *enabled* (cutting) or *disabled* (inactive).
+
+**Drawing states**
+    For each drawing in the scene, the view stores whether the drawing object is *shown* or *hidden* in the viewport.
+
+**Viewport state** (optional, per view)
+    A view can optionally save and restore the 3D viewport state. Each of the three sub-settings can be toggled independently:
+
+    - *Orientation* – The position, rotation, and zoom level of the 3D viewport.
+    - *Projection* – Orthographic or perspective projection mode.
+    - *Shading* – The viewport shading mode (Solid, Material Preview, Rendered, etc.).
+
+    Use the **Save Current** button to snapshot the current viewport into the active view, and **Load Saved** to restore it without switching views.
+
+
+Section Method
+--------------
+
+Each view has its own **Section Method** setting that controls how all enabled sections in that view apply their cut:
+
+- **Boolean** – Uses a cutter mesh and Geometry Nodes boolean modifier. Works with all shading modes and render engines.
+- **Shader** – Uses shader node groups injected into object materials. Faster to set up but requires a compatible render engine.
+
+See :doc:`sections` for a detailed explanation of each method.
+
+
+Switching Views
+---------------
+
+Clicking on a view in the *Views* list makes it the active view and immediately restores all section and drawing states for that view, if *Restore View on Change* is enabled in the addon preferences (the default). Otherwise, the view can be restored manually by clicking the refresh button next to the view name.
+
+If *Auto Save Viewport on Change* is enabled in the preferences, the viewport state of the previous view is automatically saved before switching.
+
+
+Creating Views
+--------------
+
+When you create a new view you can choose one of two starting points:
+
+- **Copy Active View** – The new view inherits all section states, drawing states, and viewport settings of the current active view.
+- **Blank View** – All sections are disabled, all drawings are hidden, and viewport settings are at their defaults.
+
+.. seealso::
+
+   :doc:`/guides/views-and-viewport`
+      Practical guide for setting up and working with views.

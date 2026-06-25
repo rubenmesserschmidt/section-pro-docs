@@ -1,0 +1,64 @@
+Managing Scope
+==============
+
+A section's **scope** determines which objects are affected by the cut. You set the scope type when creating the section, and you can add or remove specific objects and collections afterwards from the *Scope* sub-panel.
+
+
+Scope Types
+-----------
+
+Objects Scope
+~~~~~~~~~~~~~
+
+The section cuts only the objects you have explicitly added. This gives you precise, per-object control.
+
+**To add objects:**
+
+1. Select one or more objects in the viewport.
+2. In the *Scope* sub-panel, click the **+** (Add Objects) button.
+
+**To remove objects:**
+
+1. Select the objects you want to remove.
+2. Click the **−** (Remove Objects) button.
+
+**To select all objects currently in scope:**
+
+Click **Select All** in the *Scope* sub-panel. All scoped objects become selected in the viewport.
+
+
+Collections Scope
+~~~~~~~~~~~~~~~~~
+
+The section cuts all supported objects inside the collections you have added. When objects are added to or removed from a collection in the Outliner, the scope does not update automatically — you need to **refresh** it.
+
+**To add collections:**
+
+1. Select one or more collections in the **Outliner** (click on the collection names).
+2. Click the **+** button in the *Scope* sub-panel’s collections list.
+
+**To remove a collection:**
+
+Select the collection entry in the list and click **−** (Remove Collection). The objects from that collection are immediately removed from the section's scope.
+
+**To refresh a collection:**
+
+Click the **Refresh** icon next to a collection entry to synchronise the section scope with the current collection contents. Use **Refresh All** to update every collection in one step.
+
+
+Scene Scope
+~~~~~~~~~~~
+
+The section automatically targets all supported objects in the active scene. No explicit object or collection assignment is needed.
+
+**To refresh the scope** after adding objects to the scene, click **Refresh Scene** in the *Scope* sub-panel.
+
+
+Supported Object Types
+----------------------
+
+Not all Blender object types can be directly sectioned. Mesh, curve, and font objects are natively supported. Objects of unsupported types (such as meta objects or surfaces, and instanced or linked objects and collections) are automatically represented by a proxy mesh that is created and managed internally by Section Pro. You do not need to do anything special — the proxy is created transparently when you add the object to a section's scope.
+
+.. note::
+
+   Internal proxy objects are stored in the sub-collection ``_SP_proxies`` inside the ``_SP_internal`` collection and should not be renamed, moved, or deleted manually.
