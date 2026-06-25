@@ -74,7 +74,7 @@ Alternative: Create Section by Drawing
 
 Instead of using one of the alignment options, you can draw the section plane directly in the viewport:
 
-1. Run the **Create Section by Drawing** operator (available below the section create button or via the operator search).
+1. Hold :kbd:`Shift` while clicking the same **+** button to add a new section. This automatically switches to *Draw Section* mode, where you can draw a line in the viewport to define the section plane.
 2. Click once to set the first edge of the section line.
 3. Click again to set the second edge. The section plane is automatically aligned perpendicular to the view and centered on the drawn line.
 

@@ -39,7 +39,9 @@ Section Settings
    * - Setting
      - Description
    * - **Enabled** *(default)*
-     - Whether newly created sections are enabled by default in the active view. Disabled by default.
+     - Whether newly created sections are enabled by default. Disabled by default.
+   * - **Hidden** *(default)*
+     - Whether newly created sections are hidden by default. Disabled by default.
    * - **Cut Lazy Load** *(default)*
      - Whether *Lazy Load* is enabled by default for new sections. Enabled by default.
 
@@ -51,12 +53,12 @@ Drawing Settings
 
 .. list-table::
    :header-rows: 1
-   :widths: 40 60
+   :widths: 40 60 
 
    * - Setting
      - Description
-   * - **Show** *(default)*
-     - Whether newly created drawings are visible by default in the active view. Enabled by default.
+   * - **Hidden** *(default)*
+     - Whether newly created drawings are hidden by default. Disabled by default.
 
 
 Section Color Settings
