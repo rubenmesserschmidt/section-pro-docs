@@ -42,8 +42,12 @@ Section Settings
      - Whether newly created sections are enabled by default. Disabled by default.
    * - **Hidden** *(default)*
      - Whether newly created sections are hidden by default. Disabled by default.
-   * - **Cut Lazy Load** *(default)*
+   * - **Lazy Load** *(default)*
      - Whether *Lazy Load* is enabled by default for new sections. Enabled by default.
+   * - **Show Plane** *(default)*
+     - Whether the section is displayed as a transparent plane in the viewport by default. Enabled by default.
+   * - **Plane Color** *(default)*
+     - Default color used to display this plane.
 
 See :ref:`Section Display <prop-section>` for an explanation of what *Lazy Load* does.
 
