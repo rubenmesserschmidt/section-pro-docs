@@ -1,0 +1,57 @@
+Installation
+============
+
+Requirements
+------------
+
+- **Blender 4.2** or newer
+- Supported platforms: Windows (x64, ARM64), macOS (ARM64), Linux (x64)
+
+
+Installing the Extension per Drag and Drop
+------------------------------------------
+
+Section Pro is distributed as a Blender extension (``.zip``).
+If you got Section Pro on Superhive (formerly Blender Market), you can install it directly per drag and drop:
+
+1. Go to your **Orders** page on Superhive
+2. Find your Section Pro order and click **Go to Downloads**.
+3. Follow the instructions to setup your Superhive remote repository, then drag and drop the marked field into Blender.
+
+
+Installing the Extension Manually
+---------------------------------
+
+1. Download the Section Pro ``.zip`` file.
+2. Open Blender and go to **Edit → Preferences → Get Extensions**.
+3. Click the **⋮** (dropdown) button at the top-right of the Extensions panel and choose **Install from Disk…**
+4. Select the downloaded ``.zip`` file and click **Install from Disk**.
+5. Section Pro will appear in the installed extensions list and is enabled automatically.
+
+.. note::
+
+   Do **not** unzip the file before installing. Blender expects the original ``.zip`` archive.
+
+
+Accessing the Panel
+-------------------
+
+After installation, open the **3D Viewport**, press :kbd:`N` to open the sidebar, and select the **Section Pro** tab.
+
+The panel contains three main sub-panels:
+
+- **Sections** – Create and manage section cuts.
+- **Drawings** – Create and manage 2D line drawings (visible after creating a section).
+- **Views** – Manage named view configurations (visible after creating a section).
+
+
+Uninstalling
+------------
+
+1. Go to **Edit → Preferences → Get Extensions** (or **Add-ons** in older builds).
+2. Find *Section Pro* in the list.
+3. Click **Remove** or disable the toggle to deactivate it.
+
+.. note::
+
+   Removing the addon does **not** delete Section Pro data that is already saved in your ``.blend`` files. However, Section Pro operators and panels will no longer be available until the addon is reinstalled.

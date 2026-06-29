@@ -1,0 +1,11 @@
+Reference
+=========
+
+Detailed reference for every operator, property, and preference exposed by Section Pro.
+
+.. toctree::
+   :maxdepth: 1
+
+   operators
+   properties
+   preferences

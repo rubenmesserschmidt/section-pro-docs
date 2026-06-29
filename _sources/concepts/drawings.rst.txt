@@ -1,0 +1,93 @@
+Drawings
+========
+
+A **drawing** is a 2D line representation generated from a section cut. It captures the geometry of the scoped objects at the moment of creation and stores it as a mesh object composed entirely of edges. Drawings are non-destructive: the source scene geometry is never modified.
+
+You create drawings from the *Drawings* panel in the Section Pro sidebar. Each drawing is linked to the section that produced it and can be refreshed at any time to reflect changes to the scene.
+
+
+Edge Layers
+-----------
+
+A drawing mesh stores its edges in named integer attribute layers. Each layer corresponds to a different type of edge:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 80
+
+   * - Layer
+     - Description
+   * - **Section**
+     - The cross-section outline – the edges where the cutting plane intersects the geometry. Always present.
+   * - **Projection**
+     - Silhouette and visible edges of the scoped objects projected onto the section plane. Only present when *Projection* is enabled.
+   * - **Hidden**
+     - Edges that are obscured by other geometry. Only present when *Hidden Edge Detection* is enabled.
+
+You can select edges by layer from the *Actions* sub-panel, which is useful for applying different line weights or styles via Grease Pencil or export.
+
+
+Projection
+----------
+
+When *Projection* is enabled, Section Pro projects the visible edges of the scoped objects onto the section plane in addition to the section outline. Several sub-options refine this:
+
+**Perspective**
+    Applies a subtle perspective distortion to the projected edges. Controlled by the *Distortion* value.
+
+**Limit Distance**
+    Only objects (or parts of objects) within a set distance from the section plane are included in the projection. Useful for keeping the drawing focused and for improving performance in large scenes.
+
+**Hidden Edge Detection (HED)**
+    Detects and isolates edges that are hidden behind other geometry. The result is stored in the *Hidden* edge layer, allowing you to display or export them separately (for example as dashed lines). HED is computationally expensive; use the pre-made quality presets or a projection limit to manage performance.
+
+    Quality presets:
+
+    .. list-table::
+       :header-rows: 1
+       :widths: 15 85
+
+       * - Preset
+         - Description
+       * - **Low**
+         - Fast, lower accuracy. Suitable for quick previews.
+       * - **Medium**
+         - Balanced speed and accuracy. The default.
+       * - **High**
+         - Slower, higher accuracy.
+       * - **Ultra**
+         - Maximum accuracy, slowest. Use for final exports of complex scenes.
+       * - **Custom**
+         - Manually control all HED parameters (sample distance, boundary precision, detection precision, dissolve angle, merge distance).
+
+
+Placement
+---------
+
+When creating a drawing you choose where the resulting drawing object is placed:
+
+- **Section Origin** – The drawing object is placed at the section's location and orientation. This is the most common choice when you want the drawing to sit at the cut plane in 3D space.
+- **World Origin** – The drawing object is placed at the world origin (0, 0, 0). Convenient when you plan to lay out multiple drawings on a flat plane.
+- **Custom** – After creation the drawing object can be placed freely in the 3D viewport.
+
+
+Refreshing and Exporting
+------------------------
+
+After the scene geometry changes, use **Refresh Drawing** to regenerate the drawing in-place using the same settings. The drawing object keeps its current position and all stored settings are preserved.
+
+Drawings can be exported to several formats:
+
+- **DXF** – Standard CAD interchange format.
+- **SVG** – Scalable vector graphics.
+- **JSON** – Raw edge data for custom processing.
+
+The export unit can be set independently of the Blender scene unit.
+
+.. seealso::
+
+   :doc:`/guides/creating-drawings`
+      Step-by-step guide for creating a drawing from a section.
+
+   :doc:`/guides/exporting-drawings`
+      How to export drawings to DXF, SVG, or JSON.

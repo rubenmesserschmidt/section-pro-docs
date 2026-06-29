@@ -1,0 +1,58 @@
+Exporting Drawings
+==================
+
+Section Pro can export drawings to three file formats: **DXF**, **SVG**, and **JSON**. All exports use the 2D edge data stored in the drawing mesh object.
+
+
+Step 1: Select the Drawing
+--------------------------
+
+In the *Drawings* list, click the drawing you want to export to make it active.
+
+
+Step 2: Open the Export Dialog
+------------------------------
+
+In the *Export* sub-panel (below the drawings list), click **Export Drawing**. A file browser opens.
+
+
+Step 3: Configure the Export
+-----------------------------
+
+.. list-table::
+   :header-rows: 1
+   :widths: 25 75
+
+   * - Setting
+     - Description
+   * - **File Type**
+     - The output format: **DXF**, **SVG**, or **JSON**.
+   * - **Unit**
+     - The unit system used for coordinates in the exported file. Choose from Meters, Centimeters, Millimeters, Inches, or Feet.
+
+Set the desired filename and path, then click **Export Drawing**.
+
+.. note::
+
+   If the filename does not end with the correct extension for the chosen format, the correct extension is appended automatically.
+
+
+Format Notes
+------------
+
+**DXF** (default)
+    Industry-standard 2D CAD format. Compatible with AutoCAD, FreeCAD, LibreCAD, and most other CAD applications. Edges from all layers (Section, Projection, Hidden) are exported.
+
+**SVG**
+    Scalable vector graphics. Suitable for web display, illustration software, and laser cutting. Edges are exported as ``<line>`` elements.
+
+**JSON**
+    Raw edge data as a JSON array. Useful for writing custom scripts or importing into applications that do not support DXF or SVG.
+
+
+Tips
+----
+
+- Use the **Limit Distance** projection option when creating the drawing to reduce the number of edges and keep the exported file clean.
+- To export only specific edge types (e.g., only the section outline without projection edges), select the edges by layer in Edit Mode first and delete the unwanted edges from a copy of the drawing object. Alternatively, create another separate drawing for the section with only the desired edge layers enabled.
+- Make sure you **Refresh** the drawing before exporting if the scene geometry has changed since the drawing was created.
